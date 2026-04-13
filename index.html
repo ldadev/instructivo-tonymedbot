@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructivo TonyBot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap');
+  
+  :root {
+    --bg: #0d1117; --card: #161b22; --border: rgba(255,255,255,0.08);
+    --red: #e63946; --gold: #fbbf24; --blue: #38bdf8; --green: #4ade80;
+    --text: #e2e8f0; --muted: #64748b; --tg: #2AABEE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+
+  /* --- HERO SECTION --- */
+  .hero { position: relative; height: 380px; overflow: hidden; display: flex; align-items: flex-end; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,17,23,0) 0%, rgba(13,17,23,0.6) 50%, rgba(13,17,23,1) 100%); }
+  .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 32px 40px; }
+  .badge { display: inline-block; background: var(--red); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 16px; }
+  .hero h1 { font-size: 40px; font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
+  .hero h1 em { font-style: normal; color: var(--red); }
+  .hero-sub { color: #94a3b8; font-size: 15px; font-weight: 400; }
+
+  /* --- CONTENIDO --- */
+  .content { padding: 48px 32px 64px; max-width: 600px; margin: 0 auto; }
+  .section-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 40px; }
+
+  /* --- PASOS --- */
+  .step { display: grid; grid-template-columns: 56px 1fr; gap: 0 24px; margin-bottom: 48px; align-items: start; }
+  .step-left { display: flex; flex-direction: column; align-items: center; }
+  .step-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  
+  .step-circle.red   { background: rgba(230,57,70,0.1); border: 1px solid rgba(230,57,70,0.3); }
+  .step-circle.blue  { background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); }
+  .step-circle.green { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); }
+  .step-circle.gold  { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); }
+  
+  .step-line { width: 1px; flex: 1; min-height: 40px; margin-top: 12px; background: linear-gradient(to bottom, var(--border), transparent); }
+
+  .step-right { padding-top: 2px; }
+  .step-tag { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .tag-red { color: var(--red); } .tag-blue { color: var(--blue); } .tag-green { color: var(--green); } .tag-gold { color: var(--gold); }
+  
+  .step-right h2 { font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #ffffff; }
+  .step-right p { font-size: 15px; color: #94a3b8; line-height: 1.6; }
+
+  /* Estilo especial para el comando /iniciar */
+  .command { background: rgba(255,255,255,0.1); color: #fff; padding: 2px 8px; border-radius: 6px; font-family: monospace; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); }
+
+  /* --- BOTONES --- */
+  .btn-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; text-decoration: none; border: 1px solid; transition: all 0.2s; }
+  .btn-android { color: #4ade80; border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.05); }
+  .btn-ios     { color: #38bdf8; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.05); }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0 48px; }
+
+  /* --- CTA CARD --- */
+  .cta-card { background: #161b22; border: 1px solid var(--border); border-radius: 24px; padding: 48px 32px; text-align: center; }
+  .cta-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+  .cta-card h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+  .cta-card p { color: #94a3b8; font-size: 15px; margin-bottom: 32px; }
+  .btn-tg { display: inline-flex; align-items: center; gap: 12px; background: var(--tg); color: #fff; font-weight: 700; font-size: 16px; padding: 18px 36px; border-radius: 14px; text-decoration: none; transition: all 0.2s; }
+  .btn-tg:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(42,171,238,0.3); }
+
+  .tip { margin-top: 32px; background: rgba(251,191,36,0.03); border-left: 3px solid var(--gold); padding: 20px; font-size: 14px; color: #fde68a; line-height: 1.6; }
+  
+  .footer { text-align: center; margin-top: 64px; color: var(--muted); font-size: 13px; padding-bottom: 40px; }
+  .footer strong { color: var(--red); font-weight: 700; }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <img src="tonymedbot.jpg" alt="TonyBot">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="badge">Servicio de Salud · Univalle</div>
+      <h1>Bienvenido<br><em>Soy el Medico Tony</em></h1>
+      <p class="hero-sub">Tu Chat bot de soporte técnico oficial en Telegram</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <p class="section-label">Guía de inicio rápido</p>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle red">📲</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-right">
+        <span class="step-tag tag-red">Paso 01</span>
+        <h2>Instala Telegram</h2>
+        <p>Descarga la aplicación oficial desde la tienda de tu dispositivo móvil. Es segura y gratuita.</p>
+        <div class="btn-row">
+          <a class="btn btn-android" href="#">▶&nbsp; Play Store</a>
+          <a class="btn btn-ios" href="#">🍎&nbsp; App Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle blue">👤</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-right">
+        <span class="step-tag tag-blue">Paso 02</span>
+        <h2>Configura tu cuenta</h2>
+        <p>Ingresa tu número móvil para recibir el código de activación vía SMS e iniciar sesión.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle green">✅</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-right">
+        <span class="step-tag tag-green">Paso 03</span>
+        <h2>Valida tu identidad</h2>
+        <p>Usa tu <strong>correo institucional</strong>. El sistema enviará un código OTP para confirmar tu vinculación.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle gold">🛠️</div>
+      </div>
+      <div class="step-right">
+        <span class="step-tag tag-gold">Paso 04</span>
+        <h2>Habla con Tony</h2>
+        <p>Para empezar a hablar con el Medico Tony escribe el comando <span class="command">/iniciar</span>. Luego, indica el número de inventario,serial ó id del equipo.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="cta-card">
+      <span class="cta-icon">🚀</span>
+      <h2>¡Todo listo!</h2>
+      <p>Entra al chat y recuerda escribir <span class="command">/iniciar</span> para comenzar.</p>
+      <a class="btn-tg" href="https://t.me/+TPyUqmPA4QY0OGZh">Ir ahora</a>
+    </div>
+
+    <div class="tip">
+      <strong>Nota importante:</strong> Si experimentas dificultades técnicas con el bot, por favor dirígete a la oficina de Soporte Técnico del Servicio de Salud.
+    </div>
+
+    <div class="footer">
+      Servicio de Salud &nbsp;·&nbsp; <strong>Universidad del Valle</strong><br>
+      Soporte Automatizado con IA
+    </div>
+  </div>
+
+</body>
+</html>
