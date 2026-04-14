@@ -10,6 +10,7 @@
   :root {
     --bg: #0d1117; --card: #161b22; --border: rgba(255,255,255,0.08);
     --red: #e63946; --gold: #fbbf24; --blue: #38bdf8; --green: #4ade80;
+    --lila: #a855f7; /* Lila corporativo */
     --text: #f0f4f8; --muted: #cbd5e1; --tg: #2AABEE;
   }
 
@@ -23,14 +24,14 @@
   .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 32px 40px; }
   .badge { display: inline-block; background: var(--red); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 16px; }
   .hero h1 { font-size: 40px; font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
-  .hero h1 em { font-style: normal; color: var(--red); }
+  .hero h1 em { font-style: normal; color: var(--lila); }
   .hero-sub { color: #cbd5e1; font-size: 15px; font-weight: 400; }
 
   /* --- CONTENIDO --- */
   .content { padding: 48px 24px 64px; max-width: 600px; margin: 0 auto; }
   .section-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #64748b; margin-bottom: 40px; text-align: center; }
 
-  /* --- PASOS MEJORADOS --- */
+  /* --- PASOS --- */
   .step { display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; margin-bottom: 32px; align-items: start; }
   .step-left { display: flex; flex-direction: column; align-items: center; }
   .step-circle { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; z-index: 2; }
@@ -42,7 +43,6 @@
   
   .step-line { width: 2px; flex: 1; min-height: 60px; margin-top: 8px; background: rgba(255,255,255,0.05); }
 
-  /* --- EL RECUADRO DE INSTRUCCIONES --- */
   .step-right { 
     background: var(--card); 
     border: 1px solid var(--border); 
@@ -62,12 +62,12 @@
   .btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
   .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 700; text-decoration: none; border: 1px solid; transition: all 0.2s; }
   .btn-android { color: #4ade80; border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.05); }
-  .btn-ios     { color: #38bdf8; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.05); }
+  .btn-ios      { color: #38bdf8; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.05); }
 
   .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0 48px; }
 
   /* --- CTA CARD --- */
-  .cta-card { background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); border: 1px solid rgba(42,171,238,0.3); border-radius: 24px; padding: 40px 24px; text-align: center; }
+  .cta-card { background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 24px; padding: 40px 24px; text-align: center; }
   .cta-icon { font-size: 40px; margin-bottom: 12px; display: block; }
   .cta-card h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; color: #fff; }
   .cta-card p { color: #94a3b8; font-size: 14px; margin-bottom: 24px; }
@@ -77,7 +77,7 @@
   .tip { margin-top: 32px; background: rgba(251,191,36,0.05); border: 1px solid rgba(251,191,36,0.2); border-radius: 12px; padding: 16px; font-size: 13.5px; color: #fde68a; line-height: 1.5; text-align: center; }
   
   .footer { text-align: center; margin-top: 64px; color: #64748b; font-size: 12px; padding-bottom: 40px; }
-  .footer strong { color: var(--red); font-weight: 700; }
+  .footer strong { color: var(--lila); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -86,8 +86,8 @@
     <img src="tonymedbot.jpg" alt="TonyBot">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>Bienvenido<br><em>Soy el Medico Tony</em></h1>
-      <p class="hero-sub">Tu Chat bot de soporte técnico oficial en Telegram</p>
+      <h1>Bienvenido<br><em>Soy el Médico Tony</em></h1>
+      <p class="hero-sub">Tu Chatbot de soporte técnico oficial en Telegram</p>
     </div>
   </div>
 
@@ -139,12 +139,13 @@
         <div class="step-circle gold">🛠️</div>
       </div>
       <div class="step-right">
-  <span class="step-tag tag-gold">Paso 04</span>
-  <h2>Habla con Tony</h2>
-  <p>
-    Para comenzar a hablar con el <strong>Médico Tony</strong>, escribe el comando <span class="command">/iniciar</span> (solo si estás en un grupo; en privado el inicio es automático). Luego, indica el <strong>número de inventario, serial o ID</strong> del equipo.
-  </p>
-</div>
+        <span class="step-tag tag-gold">Paso 04</span>
+        <h2>Habla con Tony</h2>
+        <p>
+          Para comenzar a hablar con el <strong>Médico Tony</strong>, escribe el comando <span class="command">/iniciar</span> (solo si estás en un grupo; en privado el inicio es automático). Luego, indica el <strong>número de inventario, serial o ID</strong> del equipo.
+        </p>
+      </div>
+    </div>
 
     <hr class="divider">
 
@@ -161,7 +162,6 @@
 
     <div class="footer">
       Servicio de Salud &nbsp;·&nbsp; <strong>Universidad del Valle</strong><br>
-      Soporte Automatizado con IA
     </div>
   </div>
 
